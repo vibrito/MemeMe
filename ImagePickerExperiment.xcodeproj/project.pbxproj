@@ -409,6 +409,7 @@
 				81411FDF1B969F1B0056CB1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		81411FE01B969F1B0056CB1E /* Build configuration list for PBXNativeTarget "ImagePickerExperimentTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +418,7 @@
 				81411FE21B969F1B0056CB1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
