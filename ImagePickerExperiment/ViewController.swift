@@ -21,6 +21,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolBarUp: UIToolbar!
     @IBOutlet weak var toolBarDown: UIToolbar!
     
+    var isTextFieldDown = false
+    var floatViewRect : Float = 0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -46,6 +49,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     {
         buttonCamera.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         buttonShare.enabled = false
+        buttonCancel.enabled = false
         self.subscribeToKeyboardNotifications()
     }
     
@@ -99,6 +103,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.textFieldDown.text = ""
             self.textFieldUp.text = ""
             self.imageViewPicker.image = nil
+            self.buttonCancel.enabled = false
         }
         
         alertController.addAction(OKAction)
@@ -106,8 +111,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.presentViewController(alertController, animated: true) {
             
         }
-        
-        //TODO: clean screen
     }
     
     @IBAction func actionPickAnImageFromLibrary (sender: AnyObject)
@@ -141,9 +144,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     {
         if  textField == self.textFieldDown
         {
-            
+            isTextFieldDown = true
         }
     }
+    
+//    func textFieldDidEndEditing(textField: UITextField)
+//    {
+//        if  textField == self.textFieldDown
+//        {
+//            isTextFieldDown = false
+//        }
+//    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
@@ -166,12 +177,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillHide(notification: NSNotification)
     {
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        if isTextFieldDown
+        {
+            self.view.frame.origin.y += getKeyboardHeight(notification)
+            isTextFieldDown = false
+        }
     }
     
     func keyboardWillShow(notification: NSNotification)
     {
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        floatViewRect = Float(self.view.frame.origin.y)
+        if isTextFieldDown
+        {
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat
