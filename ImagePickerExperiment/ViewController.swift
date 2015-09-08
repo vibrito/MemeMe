@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ImagePickerExperiment
+//  MemeMe
 //
 //  Created by Vinicius Brito on 9/2/15.
 //  Copyright (c) 2015 Vinicius. All rights reserved.
@@ -22,34 +22,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolBarDown: UIToolbar!
     
     var isTextFieldDown = false
-    var floatViewRect : Float = 0
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         let memeTextAttributes = [
-            NSStrokeColorAttributeName     : UIColor .whiteColor(),
-            NSForegroundColorAttributeName : UIColor .blackColor(),
+            NSStrokeColorAttributeName     : UIColor .blackColor(),
+            NSForegroundColorAttributeName : UIColor .whiteColor(),
             NSBackgroundColorAttributeName : UIColor .clearColor(),
             NSFontAttributeName            : UIFont(name:"HelveticaNeue-CondensedBlack", size: 30)!,
             NSStrokeWidthAttributeName     : -4.0
         ]
         
-        textFieldUp.borderStyle = UITextBorderStyle.RoundedRect
-        textFieldDown.borderStyle = UITextBorderStyle.RoundedRect
-        
         textFieldUp.defaultTextAttributes   = memeTextAttributes
         textFieldUp.textAlignment           = NSTextAlignment.Center
         textFieldDown.defaultTextAttributes = memeTextAttributes
         textFieldDown.textAlignment         = NSTextAlignment.Center
+        
+        self.enableUpButtons(false)
     }
     
     override func viewWillAppear(animated: Bool)
     {
         buttonCamera.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        buttonShare.enabled = false
-        buttonCancel.enabled = false
         self.subscribeToKeyboardNotifications()
     }
     
@@ -58,35 +54,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.unsubscribeFromKeyboardNotifications()
     }
     
-    func generateMemedImage() -> UIImage
-    {
-        toolBarDown.hidden = true
-        toolBarUp.hidden = true
-        
-        textFieldUp.borderStyle = UITextBorderStyle.None
-        textFieldDown.borderStyle = UITextBorderStyle.None
-        
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
-            afterScreenUpdates: true)
-        let memedImage : UIImage =
-        UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        toolBarUp.hidden = false
-        toolBarDown.hidden = false
-        
-        textFieldUp.borderStyle = UITextBorderStyle.RoundedRect
-        textFieldDown.borderStyle = UITextBorderStyle.RoundedRect
-        
-        return memedImage
-    }
-    
     @IBAction func actionShare(sender: UIBarButtonItem)
     {
         let objectsToShare = [generateMemedImage()]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { activity, success, items, error in
+            self.save()
+        }
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
@@ -99,23 +73,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         alertController.addAction(cancelAction)
         
         let OKAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
-            print("Apagar")
-            self.textFieldDown.text = ""
-            self.textFieldUp.text = ""
-            self.imageViewPicker.image = nil
-            self.buttonCancel.enabled = false
+            self.cleanScreen()
+            self.enableUpButtons(false)
         }
         
         alertController.addAction(OKAction)
         
         self.presentViewController(alertController, animated: true) {
-            
         }
     }
     
     @IBAction func actionPickAnImageFromLibrary (sender: AnyObject)
     {
         let imagePicker = UIImagePickerController()
+        self.enableUpButtons(true)
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(imagePicker, animated: true, completion: nil)
@@ -124,9 +95,54 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func actionPickAnImageFromCamera (sender: AnyObject)
     {
         let imagePicker = UIImagePickerController()
+        self.enableUpButtons(true)
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func save()
+    {
+        let allText = "\(self.textFieldUp.text) + \(self.textFieldDown.text)"
+        let image = self.imageViewPicker.image!
+        let memedImage = generateMemedImage()
+        
+        let meme = Meme( text: allText, image:
+            image, memedImage: memedImage)
+        
+        self.cleanScreen()
+    }
+    
+    func generateMemedImage() -> UIImage!
+    {
+        toolBarDown.hidden = true
+        toolBarUp.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame,
+            afterScreenUpdates: true)
+        let memedImage : UIImage =
+        UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        toolBarUp.hidden = false
+        toolBarDown.hidden = false
+        
+        return memedImage
+    }
+    
+    func enableUpButtons(isEnable : Bool)
+    {
+        self.buttonCancel.enabled = isEnable
+        self.buttonShare.enabled = isEnable
+    }
+    
+    func cleanScreen()
+    {
+        self.textFieldDown.text = ""
+        self.textFieldUp.text = ""
+        self.imageViewPicker.image = nil
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!)
@@ -142,19 +158,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldDidBeginEditing(textField: UITextField)
     {
+        self.buttonCancel.enabled = true
+        
+        // don't let the first textfield go up with the screen
         if  textField == self.textFieldDown
         {
             isTextFieldDown = true
         }
     }
-    
-//    func textFieldDidEndEditing(textField: UITextField)
-//    {
-//        if  textField == self.textFieldDown
-//        {
-//            isTextFieldDown = false
-//        }
-//    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
@@ -186,7 +197,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillShow(notification: NSNotification)
     {
-        floatViewRect = Float(self.view.frame.origin.y)
         if isTextFieldDown
         {
             self.view.frame.origin.y -= getKeyboardHeight(notification)

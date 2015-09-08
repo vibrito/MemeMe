@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ImagePickerExperiment
+//  MemeMe
 //
 //  Created by Vinicius Brito on 9/2/15.
 //  Copyright (c) 2015 Vinicius. All rights reserved.
