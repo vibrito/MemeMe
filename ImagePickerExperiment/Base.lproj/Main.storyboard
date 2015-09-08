@@ -2,19 +2,20 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Me View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ImagePickerExperiment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MemeMeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qUE-pJ-ClY">
@@ -40,7 +41,9 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Xl1-lg-sl6">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="TgE-A2-SKV"/>
+                                    <constraint firstAttribute="height" constant="30" id="TgE-A2-SKV">
+                                        <variation key="widthClass=compact" constant="34"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -77,18 +80,18 @@
                             <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y8G-DX-cyh">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="CjV-If-vlm"/>
+                                    <constraint firstAttribute="height" constant="34" id="dzG-Bh-fYg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="CjV-If-vlm"/>
+                                        <exclude reference="dzG-Bh-fYg"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="CjV-If-vlm"/>
+                                        <include reference="dzG-Bh-fYg"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -100,20 +103,20 @@
                         <constraints>
                             <constraint firstItem="qUE-pJ-ClY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="2Lc-o6-nTr"/>
                             <constraint firstItem="HPN-PM-a8a" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="5Kp-m4-Rw6"/>
+                            <constraint firstItem="Y8G-DX-cyh" firstAttribute="trailing" secondItem="Xl1-lg-sl6" secondAttribute="trailing" id="8p5-nL-hLI"/>
                             <constraint firstItem="Xl1-lg-sl6" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="HKT-EC-m9U"/>
                             <constraint firstItem="CnI-2v-BcW" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Jzl-gz-cQJ"/>
-                            <constraint firstItem="HPN-PM-a8a" firstAttribute="top" secondItem="Y8G-DX-cyh" secondAttribute="bottom" constant="27" id="Kkv-or-lwe"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qUE-pJ-ClY" secondAttribute="bottom" id="LLz-9A-62y"/>
                             <constraint firstItem="qUE-pJ-ClY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="MnH-kj-BRJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HPN-PM-a8a" secondAttribute="trailing" constant="-16" id="PSL-g2-FQF"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="HPN-PM-a8a" secondAttribute="bottom" id="Tsb-zF-6HN"/>
+                            <constraint firstItem="HPN-PM-a8a" firstAttribute="top" secondItem="Y8G-DX-cyh" secondAttribute="bottom" constant="27" id="bti-g3-Frq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CnI-2v-BcW" secondAttribute="trailing" constant="-16" id="cLA-Il-agl"/>
                             <constraint firstItem="Xl1-lg-sl6" firstAttribute="top" secondItem="CnI-2v-BcW" secondAttribute="bottom" constant="31" id="dMq-9f-fqK"/>
+                            <constraint firstItem="Y8G-DX-cyh" firstAttribute="leading" secondItem="Xl1-lg-sl6" secondAttribute="leading" id="dUW-dI-pGm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qUE-pJ-ClY" secondAttribute="trailing" constant="-16" id="mJt-Xw-TtM"/>
                             <constraint firstItem="CnI-2v-BcW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="nRV-F6-2qC"/>
                             <constraint firstItem="Xl1-lg-sl6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="qrR-g7-o2F"/>
-                            <constraint firstItem="Y8G-DX-cyh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="rpe-Ov-AH5"/>
-                            <constraint firstItem="Y8G-DX-cyh" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="s5V-vV-huo"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -133,11 +136,11 @@
                                 <exclude reference="HKT-EC-m9U"/>
                                 <exclude reference="dMq-9f-fqK"/>
                                 <exclude reference="qrR-g7-o2F"/>
-                                <exclude reference="rpe-Ov-AH5"/>
-                                <exclude reference="s5V-vV-huo"/>
+                                <exclude reference="8p5-nL-hLI"/>
+                                <exclude reference="dUW-dI-pGm"/>
                                 <exclude reference="5Kp-m4-Rw6"/>
-                                <exclude reference="Kkv-or-lwe"/>
                                 <exclude reference="PSL-g2-FQF"/>
+                                <exclude reference="bti-g3-Frq"/>
                                 <exclude reference="LLz-9A-62y"/>
                                 <exclude reference="Tsb-zF-6HN"/>
                             </mask>
@@ -160,11 +163,11 @@
                                 <include reference="HKT-EC-m9U"/>
                                 <include reference="dMq-9f-fqK"/>
                                 <include reference="qrR-g7-o2F"/>
-                                <include reference="rpe-Ov-AH5"/>
-                                <include reference="s5V-vV-huo"/>
+                                <include reference="8p5-nL-hLI"/>
+                                <include reference="dUW-dI-pGm"/>
                                 <include reference="5Kp-m4-Rw6"/>
-                                <include reference="Kkv-or-lwe"/>
                                 <include reference="PSL-g2-FQF"/>
+                                <include reference="bti-g3-Frq"/>
                                 <include reference="LLz-9A-62y"/>
                                 <include reference="Tsb-zF-6HN"/>
                             </mask>

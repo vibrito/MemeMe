@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		81411FC41B969F1B0056CB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81411FC31B969F1B0056CB1E /* AppDelegate.swift */; };
-		81411FC61B969F1B0056CB1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81411FC51B969F1B0056CB1E /* ViewController.swift */; };
+		81411FC61B969F1B0056CB1E /* MemeMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81411FC51B969F1B0056CB1E /* MemeMeViewController.swift */; };
 		81411FC91B969F1B0056CB1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81411FC71B969F1B0056CB1E /* Main.storyboard */; };
 		81411FCB1B969F1B0056CB1E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81411FCA1B969F1B0056CB1E /* Images.xcassets */; };
 		81411FCE1B969F1B0056CB1E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81411FCC1B969F1B0056CB1E /* LaunchScreen.xib */; };
@@ -30,7 +30,7 @@
 		81411FBE1B969F1B0056CB1E /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81411FC21B969F1B0056CB1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81411FC31B969F1B0056CB1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81411FC51B969F1B0056CB1E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		81411FC51B969F1B0056CB1E /* MemeMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeViewController.swift; sourceTree = "<group>"; };
 		81411FC81B969F1B0056CB1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81411FCA1B969F1B0056CB1E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81411FCD1B969F1B0056CB1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				81411FC31B969F1B0056CB1E /* AppDelegate.swift */,
-				81411FC51B969F1B0056CB1E /* ViewController.swift */,
+				81411FC51B969F1B0056CB1E /* MemeMeViewController.swift */,
 				814166381B9E621F00534B27 /* Meme.swift */,
 				81411FC71B969F1B0056CB1E /* Main.storyboard */,
 				81411FCA1B969F1B0056CB1E /* Images.xcassets */,
@@ -217,7 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				814166391B9E621F00534B27 /* Meme.swift in Sources */,
-				81411FC61B969F1B0056CB1E /* ViewController.swift in Sources */,
+				81411FC61B969F1B0056CB1E /* MemeMeViewController.swift in Sources */,
 				81411FC41B969F1B0056CB1E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +378,7 @@
 				INFOPLIST_FILE = ImagePickerExperimentTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = MemeMeTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImagePickerExperiment.app/ImagePickerExperiment";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemeMe.app/MemeMe";
 			};
 			name = Debug;
 		};
@@ -393,7 +393,7 @@
 				INFOPLIST_FILE = ImagePickerExperimentTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = MemeMeTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImagePickerExperiment.app/ImagePickerExperiment";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemeMe.app/MemeMe";
 			};
 			name = Release;
 		};
